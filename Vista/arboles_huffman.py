@@ -7,7 +7,10 @@ from PySide6.QtWidgets import (
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QPen, QBrush, QColor
 from Controlador.Internas.ArbolesHuffmanController import ArbolesHuffmanController
+<<<<<<< HEAD
 from fractions import Fraction
+=======
+>>>>>>> e36f8dc423d13d5407bb9bec5f0a441ffdebbd42
 
 
 class ArbolesHuffman(QMainWindow):
@@ -243,6 +246,7 @@ class ArbolesHuffman(QMainWindow):
             self.scene.addItem(circle)
 
             # Texto del nodo (carácter y frecuencia)
+<<<<<<< HEAD
             try:
                 freq_frac = str(Fraction(node.freq).limit_denominator())
             except Exception:
@@ -257,6 +261,12 @@ class ArbolesHuffman(QMainWindow):
                     txt = "1"
                 else:
                     txt = freq_frac
+=======
+            if node.char is not None:
+                txt = f"{node.char}\n{node.freq}"
+            else:
+                txt = str(node.freq)
+>>>>>>> e36f8dc423d13d5407bb9bec5f0a441ffdebbd42
 
             text_item = QGraphicsTextItem(txt)
             text_item.setDefaultTextColor(text_color)
@@ -310,7 +320,11 @@ class ArbolesHuffman(QMainWindow):
         texto = "Carácter | Frecuencia | Código\n"
         texto += "-" * 40 + "\n"
 
+<<<<<<< HEAD
         for char in frecuencias.keys():
+=======
+        for char in sorted(frecuencias.keys()):
+>>>>>>> e36f8dc423d13d5407bb9bec5f0a441ffdebbd42
             char_display = char if char != ' ' else '[espacio]'
             freq = frecuencias[char]
             codigo = codigos.get(char, "N/A")
@@ -368,4 +382,8 @@ class ArbolesHuffman(QMainWindow):
             )
 
         except Exception as e:
+<<<<<<< HEAD
             QMessageBox.critical(self, "Error", f"Ocurrió un problema al limpiar: {str(e)}")
+=======
+            QMessageBox.critical(self, "Error", f"Ocurrió un problema al limpiar: {str(e)}")
+>>>>>>> e36f8dc423d13d5407bb9bec5f0a441ffdebbd42

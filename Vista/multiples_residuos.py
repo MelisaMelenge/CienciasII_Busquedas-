@@ -257,6 +257,7 @@ class MultiplesResiduos(QMainWindow):
         self.scene.clear()
         root = self.controller.root
 
+<<<<<<< HEAD
         # Parámetros visuales
         level_gap = 120
         node_radius = 26
@@ -283,6 +284,31 @@ class MultiplesResiduos(QMainWindow):
             circle = QGraphicsEllipseItem(x - node_radius, y - node_radius, 2 * node_radius, 2 * node_radius)
 
             # Color según tipo
+=======
+        level_gap = 100
+        start_offset = 400
+
+        pen_line = QPen(QColor("#4C1D95"), 2)
+        brush_root = QBrush(QColor("#9F7AEA"))  # morado medio para raíz
+        brush_internal = QBrush(QColor("#C4B5FD"))  # morado claro para nodos internos
+        brush_leaf = QBrush(QColor("#7C3AED"))  # morado oscuro para hojas con letras
+        pen_node = QPen(QColor("#3b0764"), 2)
+        edge_color = QColor("#4C1D95")
+
+        def sort_key(item):
+            """Ordenar: 00, 01, 10, 11, luego el bit solitario '1'"""
+            key, _ = item
+            if len(key) == 2:
+                return (0, key)
+            else:
+                return (1, key)
+
+        def draw(node, x, y, offset, depth, is_root=False):
+            radio = 28
+            circle = QGraphicsEllipseItem(x - radio, y - radio, 2 * radio, 2 * radio)
+
+            # Colores según tipo de nodo
+>>>>>>> e36f8dc423d13d5407bb9bec5f0a441ffdebbd42
             if is_root:
                 circle.setBrush(brush_root)
             elif node.letra:
@@ -293,6 +319,7 @@ class MultiplesResiduos(QMainWindow):
             circle.setPen(pen_node)
             self.scene.addItem(circle)
 
+<<<<<<< HEAD
             # Texto centrado
             text = "root" if is_root else (node.letra.upper() if node.letra else "*")
             text_item = QGraphicsTextItem(text)
@@ -338,3 +365,68 @@ class MultiplesResiduos(QMainWindow):
         self.view.setSceneRect(brect)
         self.view.fitInView(brect, Qt.KeepAspectRatio)
         self.view.scale(1.1, 1.1)
+=======
+            # Texto del nodo
+            if is_root:
+                text = "root"
+            elif node.letra:
+                text = node.letra.upper()
+            else:
+                text = "*"
+
+            text_item = QGraphicsTextItem(text)
+            text_item.setDefaultTextColor(Qt.white)
+            text_item.setPos(x - radio / 1.7, y - 10)
+            self.scene.addItem(text_item)
+
+            # Dibujar hijos
+            children = sorted(node.children.items(), key=sort_key)
+            num_children = len(children)
+
+            if num_children == 0:
+                return
+
+            # Calcular posiciones de los hijos
+            if num_children == 1:
+                positions = [x]
+            elif num_children == 2:
+                positions = [x - offset / 2, x + offset / 2]
+            elif num_children == 3:
+                positions = [x - offset, x, x + offset]
+            else:  # 4 o más
+                positions = [x - offset * 1.5, x - offset / 2, x + offset / 2, x + offset * 1.5]
+
+            for idx, (key, child) in enumerate(children):
+                if idx < len(positions):
+                    child_x = positions[idx]
+                else:
+                    child_x = x
+
+                child_y = y + level_gap
+
+                # Línea padre-hijo
+                self.scene.addLine(x, y + radio, child_x, child_y - radio, pen_line)
+
+                # Etiqueta de la arista (mostrar los bits)
+                label_text = key
+                mid_x = (x + child_x) / 2
+                mid_y = (y + child_y) / 2 - 10
+                bit_label = QGraphicsTextItem(label_text)
+                bit_label.setDefaultTextColor(edge_color)
+                bit_label.setPos(mid_x - 8, mid_y - 6)
+                self.scene.addItem(bit_label)
+
+                # Recursión (reducir offset)
+                draw(child, child_x, child_y, max(60, offset / 1.8), depth + 1)
+
+        draw(root, 0, 0, start_offset, 0, is_root=True)
+
+        # Ajustar vista
+        brect = self.scene.itemsBoundingRect()
+        if brect.isNull():
+            return
+        self.view.setSceneRect(brect)
+        self.view.resetTransform()
+        self.view.fitInView(brect, Qt.KeepAspectRatio)
+        self.view.scale(1.2, 1.2)
+>>>>>>> e36f8dc423d13d5407bb9bec5f0a441ffdebbd42

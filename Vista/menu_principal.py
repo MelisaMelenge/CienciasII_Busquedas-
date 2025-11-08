@@ -5,15 +5,22 @@ from Vista.busqueda import Busqueda
 from Vista.grafos import Grafos
 from Vista.lineal_interna import LinealInterna
 from Vista.binaria_interna import BinariaInterna
+<<<<<<< HEAD
 from Vista.mod_interna import ModInterna
 from Vista.cuadrado_interna import CuadradoInterna
 from Vista.truncamiento_interna import TruncamientoInterna
+=======
+from Vista.mod_interna import ModInterna   # 👈 importa la clase
+from Vista.cuadrado_interna import CuadradoInterna
+from Vista.truncamiento_interna import TruncamientoInterna   # 👈 nuevo
+>>>>>>> e36f8dc423d13d5407bb9bec5f0a441ffdebbd42
 from Vista.plegamiento_interna import PlegamientoInterna
 from Vista.busqueda_residuos import BusquedaResiduos
 from Vista.arboles_digitales import ArbolesDigitales
 from Vista.tries_residuos import TriesResiduos
 from Vista.multiples_residuos import MultiplesResiduos
 from Vista.arboles_huffman import ArbolesHuffman
+<<<<<<< HEAD
 from Vista.Cubetas import Cubetas
 
 # ✅ Importa también las vistas de búsquedas externas
@@ -23,6 +30,8 @@ from Vista.mod_externa import ModExterna
 from Vista.cuadrado_externa import CuadradoExterna
 from Vista.truncamiento_externa import TruncamientoExterna
 from Vista.plegamiento_externa import PlegamientoExterna
+=======
+>>>>>>> e36f8dc423d13d5407bb9bec5f0a441ffdebbd42
 
 
 class MainWindow(QMainWindow):
@@ -34,6 +43,7 @@ class MainWindow(QMainWindow):
         self.stacked = QStackedWidget()
         self.setCentralWidget(self.stacked)
 
+<<<<<<< HEAD
         # ----- Páginas -----
         self.inicio = Inicio(cambiar_pagina_callback)
         self.busqueda = Busqueda(cambiar_pagina_callback)
@@ -56,11 +66,24 @@ class MainWindow(QMainWindow):
         self.plegamiento_externa = PlegamientoExterna(cambiar_pagina_callback)
 
         # Otros
+=======
+        # Páginas
+        self.inicio = Inicio(cambiar_pagina_callback)
+        self.busqueda = Busqueda(cambiar_pagina_callback)
+        self.grafos = Grafos(cambiar_pagina_callback)
+        self.lineal_interna = LinealInterna(cambiar_pagina_callback)
+        self.binaria_interna = BinariaInterna(cambiar_pagina_callback)
+        self.mod_interna = ModInterna(cambiar_pagina_callback)   # 👈 agrega esta
+        self.cuadrado_interna = CuadradoInterna(cambiar_pagina_callback)
+        self.truncamiento_interna = TruncamientoInterna(cambiar_pagina_callback)  # 👈 nuevo
+        self.plegamiento_interna = PlegamientoInterna(cambiar_pagina_callback)
+>>>>>>> e36f8dc423d13d5407bb9bec5f0a441ffdebbd42
         self.busqueda_residuos = BusquedaResiduos(cambiar_pagina_callback)
         self.arboles_digitales = ArbolesDigitales(cambiar_pagina_callback)
         self.tries_residuos = TriesResiduos(cambiar_pagina_callback)
         self.multiples_residuos = MultiplesResiduos(cambiar_pagina_callback)
         self.arboles_huffman = ArbolesHuffman(cambiar_pagina_callback)
+<<<<<<< HEAD
         self.cubetas = Cubetas(cambiar_pagina_callback)
 
         # ----- Añadir al stack -----
@@ -91,24 +114,49 @@ class MainWindow(QMainWindow):
         self.stacked.addWidget(self.multiples_residuos)    # 18
         self.stacked.addWidget(self.arboles_huffman)       # 19
         self.stacked.addWidget(self.cubetas)              # 20
+=======
+
+        # Añadir al stack
+        self.stacked.addWidget(self.inicio)          # 0
+        self.stacked.addWidget(self.busqueda)        # 1
+        self.stacked.addWidget(self.grafos)          # 2
+        self.stacked.addWidget(self.lineal_interna)  # 3
+        self.stacked.addWidget(self.binaria_interna) # 4
+        self.stacked.addWidget(self.mod_interna)     # 5  👈 aquí entra mod_interna
+        self.stacked.addWidget(self.cuadrado_interna)  # 6
+        self.stacked.addWidget(self.truncamiento_interna) # 7 👈 nuevo
+        self.stacked.addWidget(self.plegamiento_interna)  # 8
+        self.stacked.addWidget(self.busqueda_residuos)  # 9
+        self.stacked.addWidget(self.arboles_digitales)  # 10
+        self.stacked.addWidget(self.tries_residuos)  # 11
+        self.stacked.addWidget(self.multiples_residuos)  # 12
+        self.stacked.addWidget(self.arboles_huffman)  # 13
+>>>>>>> e36f8dc423d13d5407bb9bec5f0a441ffdebbd42
 
         # Página inicial
         self.stacked.setCurrentIndex(0)
 
     def cambiar_pagina(self, nombre):
         paginas = {
+<<<<<<< HEAD
             # Inicio
             "inicio": 0,
             "busqueda": 1,
             "grafos": 2,
 
             # Internas
+=======
+            "inicio": 0,
+            "busqueda": 1,
+            "grafos": 2,
+>>>>>>> e36f8dc423d13d5407bb9bec5f0a441ffdebbd42
             "lineal_interna": 3,
             "binaria_interna": 4,
             "mod_interna": 5,
             "cuadrado_interna": 6,
             "truncamiento_interna": 7,
             "plegamiento_interna": 8,
+<<<<<<< HEAD
 
             # Externas ✅
             "lineal_externa": 9,
@@ -126,6 +174,13 @@ class MainWindow(QMainWindow):
             "arboles_huffman": 19,
             "Cubetas": 20
 
+=======
+            "busqueda_residuos": 9,
+            "arboles_digitales": 10,
+            "tries_residuos": 11,
+            "multiples_residuos": 12,
+            "arboles_huffman": 13
+>>>>>>> e36f8dc423d13d5407bb9bec5f0a441ffdebbd42
         }
 
         if nombre in paginas:

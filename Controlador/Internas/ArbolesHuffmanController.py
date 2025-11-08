@@ -1,6 +1,7 @@
 import heapq
 from collections import Counter
 
+<<<<<<< HEAD
 class NodoHuffman:
     def __init__(self, char=None, freq=0, left=None, right=None):
         self.char = char
@@ -12,6 +13,20 @@ class NodoHuffman:
         # Si las frecuencias son iguales, comparar por el carácter
         if self.freq == other.freq:
             return (self.char or '') < (other.char or '')
+=======
+
+class NodoHuffman:
+    """Nodo para el árbol de Huffman."""
+
+    def __init__(self, char, freq):
+        self.char = char  # Carácter (None para nodos internos)
+        self.freq = freq  # Frecuencia
+        self.left = None  # Hijo izquierdo
+        self.right = None  # Hijo derecho
+
+    def __lt__(self, other):
+        """Comparador para la cola de prioridad (heap)."""
+>>>>>>> e36f8dc423d13d5407bb9bec5f0a441ffdebbd42
         return self.freq < other.freq
 
 
